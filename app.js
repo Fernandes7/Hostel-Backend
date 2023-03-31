@@ -4,6 +4,7 @@ const mongoose=require("mongoose")
 const cors=require("cors")
 const Hosteldataroute=require("./Routes/Addhostel")
 const Authroute=require("./Routes/Auth")
+const Fetchroute=require("./Routes/Fetchhostel")
 port=8000
 
 
@@ -11,6 +12,7 @@ app.use(express.json())
 app.use(cors())
 app.use("/",Hosteldataroute)
 app.use("/",Authroute)
+app.use("/",Fetchroute)
 
 
 
