@@ -21,4 +21,21 @@ router.post("/login",async(req,res)=>{
     else
     res.send("IU")
 })
+
+
+router.post("/update/:id",async(req,res)=>{
+    const id=req.params.id
+    const update=await Userdata.findByIdAndUpdate(id,req.body.updateddata)
+    if(update)
+    {
+        const selected=await Userdata.findById(id)
+        res.send(selected)
+    }
+    else
+    res.send("failed")
+})
+
+
+
+
  module.exports=router
