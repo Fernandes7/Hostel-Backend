@@ -15,6 +15,10 @@ const Hostelschema=new mongoose.Schema({
     service:{type:String},
     nearbyplace:{type:String},
     category:{type:String},
-    Availableroom:{type:Number}
+    Availableroom:{type:Number},
+    Ac:{type:String},
+    Wifi:{type:String},
+    lat:{type:Number},
+    lng:{type:Number}
 })
 module.exports=mongoose.model("Hostel",Hostelschema)

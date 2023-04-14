@@ -3,9 +3,15 @@ const Userdata=require("../models/User")
 
 
 router.post("/signup",async(req,res)=>{
+    const isExist=await Userdata.findOne({email:req.body.data.email})
+    if(isExist)
+    res.send("Already Exist User")
+    else
+    {
     const newuser= new Userdata(req.body.data)
     const saveduser=await newuser.save()
     res.send(saveduser)
+    }
 })
 
 

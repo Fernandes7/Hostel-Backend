@@ -7,7 +7,7 @@ router.post("/addhostel",async(req,res)=>{
     const newdata=new Hosteldata(req.body.data)
     const saveddata=await newdata.save()
     if(saveddata)
-    res.send("Success")
+    console.log(saveddata)
     else
     res.send("error")
 })
