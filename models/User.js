@@ -9,6 +9,7 @@ const Userschema=new mongoose.Schema({
    Address:{type:String},
    Place:{type:String},
    Status:{type:String},
-   workplace:{type:String}
+   workplace:{type:String},
+   image:{type:String}
 },{timestamps:true})
 module.exports=mongoose.model("User",Userschema)
