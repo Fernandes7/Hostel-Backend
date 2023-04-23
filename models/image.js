@@ -1,7 +1,7 @@
 const mongoose=require("mongoose")
 const ImageSchema=mongoose.Schema({
-    name:String,
-    iamge:{
+    userid:String,
+    image:{
         data:Buffer,
         contentType:String
     }
