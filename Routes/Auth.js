@@ -1,8 +1,6 @@
 const router=require("express").Router()
 const Userdata=require("../models/User")
 const ImageSchema=require("../models/image")
-const multer=require("multer")
-const fs=require("fs")
 
 
 router.post("/signup",async(req,res)=>{
@@ -44,46 +42,43 @@ router.post("/update/:id",async(req,res)=>{
     res.send("failed")
 })
 
-//multer
-const Storage=multer.diskStorage({
-    destination:(req,file,cb)=>{
-        cb(null,"uploads")
-    },
-    filename:(req,file,cb)=>{
-        cb(null,file.originalname)
-    }
-})
-const upload=multer({
-    storage:Storage,
-    limits:{fileSize:100000000000}
-})
-router.post("/single/:id", upload.single("image"), async(req, res) => {
-    if (req.file) {
-    const newimage=new ImageSchema({
-        userid:req.params.id,
-        image:{
-            data:fs.readFileSync("uploads/"+req.file.filename),
-            contentType:"image/png"
-        }
-    })
-    const savedimage=await newimage.save()
-    if(savedimage)
-    res.send(savedimage)
-    } else {
-    res.status(400).send("Please upload a valid image");
-    }
-    });
 
-
-
-    router.post("/getimage/:id",async(req,res)=>{
-        const id=req.params.id
-        const getimage=await ImageSchema.find({userid:id})
-        if(getimage)
-        res.send(getimage)
+//imagestore
+router.post("/uploadimage/:id",async(req,res)=>{
+const id=req.params.id
+const fetcheddata=await ImageSchema.findOne({userid:id})
+if(fetcheddata)
+{
+    const saveddata=await ImageSchema.findOneAndUpdate({userid:id},{image:req.body.data.datas})
+    if(saveddata)
+    {
+        const senddata=await ImageSchema.findOne({userid:id})
+        if(senddata)
+        res.send(senddata)
         else
-        res.send("No image")
+        res.send("Error Occured While Updating")
+    }
+}
+else
+{
+const saveimage=new ImageSchema({
+    userid:req.params.id,
+    image:req.body.data.datas
+})
+const savedimage=await saveimage.save()
+res.send(savedimage)
+}
+})
 
-    })
+
+router.get("/getimage/:id",async(req,res)=>{
+    const id=req.params.id
+    const fetcheddata=await ImageSchema.findOne({userid:id})
+    if(fetcheddata)
+    res.send(fetcheddata)
+    else
+    res.send("Noimage")
+})
+
 
  module.exports=router
