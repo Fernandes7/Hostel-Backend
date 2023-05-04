@@ -5,7 +5,7 @@ const cors=require("cors")
 const Hosteldataroute=require("./Routes/Addhostel")
 const Authroute=require("./Routes/Auth")
 const Fetchroute=require("./Routes/Fetchhostel")
-port=8000
+port=3000
 
 
 app.use(express.json())
