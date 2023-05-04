@@ -77,7 +77,7 @@ router.get("/getimage/:id",async(req,res)=>{
     if(fetcheddata)
     res.send(fetcheddata)
     else
-    res.send("Noimage")
+    res.send("Noimagesaved")
 })
 
 
