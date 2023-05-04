@@ -6,6 +6,7 @@ const bodyParser=require("body-parser")
 const Hosteldataroute=require("./Routes/Addhostel")
 const Authroute=require("./Routes/Auth")
 const Fetchroute=require("./Routes/Fetchhostel")
+require('dotenv');
 port=3000
 
 app.use(express.json({ limit: '10mb' }));
@@ -20,6 +21,6 @@ app.get("/ping", (req, res) => {
 
 
 mongoose.connect("mongodb://mongo:ihC98rnnQNpgqjQm4ocr@containers-us-west-41.railway.app:6078").then(()=>console.log("Connected to Database"))
-app.listen(port,(req,res)=>{
+app.listen(process.env.PORT,(req,res)=>{
     console.log("Server Started Successfully")
 })
