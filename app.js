@@ -13,7 +13,9 @@ app.use(cors())
 app.use("/",Hosteldataroute)
 app.use("/",Authroute)
 app.use("/",Fetchroute)
-
+app.get("/ping", (req, res) => {
+    res.send({ message: `Still Alive` });
+})
 
 
 
