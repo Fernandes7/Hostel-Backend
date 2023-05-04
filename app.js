@@ -17,7 +17,7 @@ app.use("/",Fetchroute)
 
 
 
-mongoose.connect("mongodb+srv://Ferno:123@cluster0.wqriud4.mongodb.net/Hostel").then(()=>console.log("Connected to Database"))
+mongoose.connect("mongodb://mongo:ihC98rnnQNpgqjQm4ocr@containers-us-west-41.railway.app:6078").then(()=>console.log("Connected to Database"))
 app.listen(port,(req,res)=>{
     console.log("Server Started Successfully")
 })
