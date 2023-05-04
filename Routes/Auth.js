@@ -1,7 +1,6 @@
 const router=require("express").Router()
 const Userdata=require("../models/User")
 const ImageSchema=require("../models/image")
-const multer=require("multer")
 
 
 router.post("/signup",async(req,res)=>{
@@ -43,23 +42,43 @@ router.post("/update/:id",async(req,res)=>{
     res.send("failed")
 })
 
-//multer
-const Storage=multer.diskStorage({
-    destination:"./images",
-    filename:(req,file,cb)=>{
-        cb(null,`${file.originalname}`)
+
+//imagestore
+router.post("/uploadimage/:id",async(req,res)=>{
+const id=req.params.id
+const fetcheddata=await ImageSchema.findOne({userid:id})
+if(fetcheddata)
+{
+    const saveddata=await ImageSchema.findOneAndUpdate({userid:id},{image:req.body.data.datas})
+    if(saveddata)
+    {
+        const senddata=await ImageSchema.findOne({userid:id})
+        if(senddata)
+        res.send(senddata)
+        else
+        res.send("Error Occured While Updating")
     }
+}
+else
+{
+const saveimage=new ImageSchema({
+    userid:req.params.id,
+    image:req.body.data.datas
 })
-const upload=multer({
-    storage:Storage,
-    limits:{fileSize:100000000000}
+const savedimage=await saveimage.save()
+res.send(savedimage)
+}
 })
-router.post("/single", upload.single("image"), (req, res) => {
-    if (req.file) {
-    res.send("Single file uploaded successfully");
-    } else {
-    res.status(400).send("Please upload a valid image");
-    }
-    });
+
+
+router.get("/getimage/:id",async(req,res)=>{
+    const id=req.params.id
+    const fetcheddata=await ImageSchema.findOne({userid:id})
+    if(fetcheddata)
+    res.send(fetcheddata)
+    else
+    res.send("Noimage")
+})
+
 
  module.exports=router
