@@ -4,6 +4,7 @@ const Hostelschema=new mongoose.Schema({
     hostelimage:{type:String,required:true},
     location:{type:String},
     mainlocation:{type:String},
+    distancefrommailocation:{type:Number},
     price:{type:Number},
     pricewithoutfood:{type:Number},
     hosteltype:{type:String},
