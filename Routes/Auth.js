@@ -4,7 +4,7 @@ const ImageSchema=require("../models/image")
 
 
 router.post("/signup",async(req,res)=>{
-    const isExist=await Userdata.findOne({email:req.body.data.email})
+    const isExist=await Userdata.findOne({email:req.body.data.email}) 
     if(isExist)
     res.send("Already Exist User")
     else
