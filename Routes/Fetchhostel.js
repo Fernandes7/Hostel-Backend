@@ -14,7 +14,9 @@ router.post("/favhotel/:id",async(req,res)=>{
     {
     const newarry=isExist.favhotelidarray
     await req.body.data.map((item)=>{
-        newarry.push(item)
+        if(newarry.includes(item));
+        else
+        newarry.push(item)  
     })
     const savedata=await Favhotel.findOneAndUpdate({userid:userid},{favhotelidarray:newarry})
     if(savedata)

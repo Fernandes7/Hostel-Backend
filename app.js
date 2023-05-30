@@ -6,6 +6,7 @@ const bodyParser=require("body-parser")
 const Hosteldataroute=require("./Routes/Addhostel")
 const Authroute=require("./Routes/Auth")
 const Fetchroute=require("./Routes/Fetchhostel")
+const Bookingroute=require("./Routes/BookingRoute")
 port=8000
 
 app.use(express.json({ limit: '10mb' }));
@@ -13,6 +14,7 @@ app.use(cors())
 app.use("/",Hosteldataroute)
 app.use("/",Authroute)
 app.use("/",Fetchroute)
+app.use("/",Bookingroute)
 
 
 
