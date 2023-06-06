@@ -20,6 +20,10 @@ const Hostelschema=new mongoose.Schema({
     Ac:{type:String},
     Wifi:{type:String},
     lat:{type:Number},
-    lng:{type:Number}
+    lng:{type:Number},
+    customiseservice:{type:Boolean,default:false},
+    nofood:{type:Number},
+    noironing:{type:Number},
+    nowash:{type:Number}
 })
 module.exports=mongoose.model("Hostel",Hostelschema)

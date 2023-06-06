@@ -57,5 +57,25 @@ router.get("/fetchfavhotel/:id",async(req,res)=>{
 })
 
 
+router.post("/deletefav/:id",async(req,res)=>{
+    const userid=req.params.id;
+    const fetchdata= await Favhotel.findOne({userid:userid})
+    const updatedata=fetchdata.favhotelidarray.filter((item)=>item!==req.body.data)
+    if(updatedata)
+    {
+        const beforeupdate=await Favhotel.findOneAndUpdate({userid:userid},{favhotelidarray:updatedata})
+        if(beforeupdate)
+        {
+            const newdata=await Favhotel.findOne({userid:userid})
+            if(newdata)
+            res.send(newdata)
+            else
+            res.send("Failed To delete data")
+        }
+    }
+
+})
+
+
 
 module.exports=router

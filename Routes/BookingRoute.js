@@ -1,4 +1,5 @@
 const router=require("express").Router()
+const Booking = require("../models/Booking")
 const BookingSchema=require("../models/Booking")
 
 router.post("/addbooking",async(req,res)=>{
@@ -15,5 +16,6 @@ router.post("/addbooking",async(req,res)=>{
     res.send("Failed") 
     }
 })
+
 
 module.exports=router
