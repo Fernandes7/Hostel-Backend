@@ -18,4 +18,14 @@ router.post("/addbooking",async(req,res)=>{
 })
 
 
+
+router.get("/getbooking/:id",async(req,res)=>{
+const userid=req.params.id
+const getbooking=await BookingSchema.find({Bookeduserid:userid})
+if(getbooking)
+res.send(getbooking)
+else
+res.send("Failed to get user")
+})
+
 module.exports=router
