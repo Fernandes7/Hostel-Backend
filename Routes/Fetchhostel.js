@@ -77,5 +77,14 @@ router.post("/deletefav/:id",async(req,res)=>{
 })
 
 
+router.get("/initialfav/:id",async(req,res)=>{
+    const data=await Favhotel.findOne({userid:req.params.id})
+    if(data)
+    res.send(data)
+    else
+    res.send("NO")
+})
+
+
 
 module.exports=router

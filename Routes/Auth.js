@@ -80,5 +80,13 @@ router.get("/getimage/:id",async(req,res)=>{
     res.send("Noimagesaved")
 })
 
+router.get("/alluser",async(req,res)=>{
+    const alluser=await Userdata.find()
+    if(alluser)
+    res.send(alluser)
+    else
+    res.send("failed to get all user")
+})
+
 
  module.exports=router
